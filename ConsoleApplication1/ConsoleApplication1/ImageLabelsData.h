@@ -4,7 +4,8 @@
 #include <map>
 #include <string>
 #include <iterator>
-#include <fstream>;
+#include <fstream>
+using namespace std;
 
 class ImageLabelsData {
 public:

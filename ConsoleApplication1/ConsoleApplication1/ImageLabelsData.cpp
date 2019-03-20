@@ -2,16 +2,17 @@
 //
 
 #include <iostream>
-#include "ImageLabelsData.h";
+#include "ImageLabelsData.h"
 using namespace std;
 
 //multimap that maps a number-image in an image file to its class label
 //read the image file 
 //key: class (as an int)
 //value: number-image as a (2d vector of chars)
-multimap<int, vector<vector<char>>> ImageLabelsData::MapLabelsToImages(string labels_file, string images_file) {
+
+/*multimap<int, vector<vector<char>>> ImageLabelsData::MapLabelsToImages(string labels_file, string images_file) {
 	return;
-}
+}*/
 
 //method that reads a file of integer labels. push each integer into a vector of image labels
 vector<int> ImageLabelsData::CreateVectorOfLabels(string file_name) {
@@ -44,7 +45,7 @@ vector<vector<vector<int>>> ImageLabelsData::CreateVectorOfImages(string file_na
 	} else {
 		char image_char;
 		/*for (int line_index = 0; line_index < vector_image_labels.size(); line_index++) {*/
-		while (!read_file.eof) {
+		while (!read_file.eof()) {
 			vector<vector<int>> single_image;
 
 			single_image.resize(28);
