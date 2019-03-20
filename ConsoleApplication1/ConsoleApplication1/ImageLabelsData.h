@@ -9,7 +9,7 @@ using namespace std;
 
 class ImageLabelsData {
 public:
-	multimap<int, vector<vector<char>>> MapLabelsToImages(string labels_file, string images_file);
+	multimap<int, vector<vector<int>>> MapLabelsToImages(string labels_file, string images_file);
 	//vector<int> vector_image_labels;
 	//vector<vector<int>> single_image;
 

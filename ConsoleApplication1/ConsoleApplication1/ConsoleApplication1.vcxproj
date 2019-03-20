@@ -153,9 +153,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ImageLabelsData.cpp" />
+    <ClCompile Include="TrainingData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageLabelsData.h" />
+    <ClInclude Include="TrainingData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

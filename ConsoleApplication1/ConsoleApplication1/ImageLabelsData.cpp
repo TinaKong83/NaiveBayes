@@ -5,18 +5,9 @@
 #include "ImageLabelsData.h"
 using namespace std;
 
-//multimap that maps a number-image in an image file to its class label
-//read the image file 
-//key: class (as an int)
-//value: number-image as a (2d vector of chars)
-
-/*multimap<int, vector<vector<char>>> ImageLabelsData::MapLabelsToImages(string labels_file, string images_file) {
-	return;
-}*/
-
 //method that reads a file of integer labels. push each integer into a vector of image labels
 vector<int> ImageLabelsData::CreateVectorOfLabels(string file_name) {
-	vector<int> vector_image_labels;
+	vector<int> vector_labels;
 	ImageLabelsData image_labels_data;
 	ifstream read_file;
 	read_file.open(file_name);
@@ -26,11 +17,11 @@ vector<int> ImageLabelsData::CreateVectorOfLabels(string file_name) {
 		int label;
 		//read file line by line, assuming each line is some integer
 		while (read_file >> label) {
-			vector_image_labels.push_back(label);
+			vector_labels.push_back(label);
 		}
 	}
 	read_file.close();
-	return vector_image_labels;
+	return vector_labels;
 }
 
 //method that reads a file of character images. 
@@ -57,10 +48,10 @@ vector<vector<vector<int>>> ImageLabelsData::CreateVectorOfImages(string file_na
 						continue;
 					}
 					if (image_char == ' ') {
-						single_image.at(i).at(j) = 0;
+						single_image[i][j] = 0;
 					}
 					else if (image_char == '#' || image_char == '+') {
-						single_image.at(i).at(j) = 1;
+						single_image[i][j] = 1;
 					}
 				}
 			}
@@ -69,6 +60,21 @@ vector<vector<vector<int>>> ImageLabelsData::CreateVectorOfImages(string file_na
 		}
 	}
 	return vector_image_features;
+}
+
+//multimap that maps a number-image in an image file to its class label
+//read the image file 
+//key: class (as an int)
+//value: number-image as a (2d vector of chars)
+
+multimap<int, vector<vector<int>>> ImageLabelsData::MapLabelsToImages(string labels_file, string images_file) {
+	multimap <int, vector<vector<int>>> map_label_to_image;
+	vector<int> vector_of_labels = CreateVectorOfLabels(labels_file);
+	vector<vector<vector<int>>> vector_of_images = CreateVectorOfImages(images_file);
+	for (int i = 0; i < vector_of_labels.size(); i++) {
+		map_label_to_image.insert(pair<int, vector<vector<int>>>(vector_of_labels.at(i), vector_of_images.at(i)));
+	}
+	return map_label_to_image;
 }
 
 
