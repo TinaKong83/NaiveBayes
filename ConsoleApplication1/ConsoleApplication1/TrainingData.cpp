@@ -52,3 +52,20 @@ double TrainingData::FindFeatureProbabilityFromClass(int row, int col, int label
 	return feature_probability;
 }
 
+//create a map <int, vector<vector<double>>>
+//vector is of size 28x28, each element in vector is the feature probability of that position
+map<int, vector<vector<double>>> TrainingData::MapFeatureProbability(int feature, multimap <int, vector<vector<int>>> map_label_to_image) {
+	map<int, vector<vector<double>>> map_feature_probability;
+	
+	for (int class_value = 0; class_value < 10; class_value++) {
+		vector<vector<double>> vector_of_probabilities(28, vector<double>(28, 0.0));
+		for (int i = 0; i < 28; i++) {
+			for (int j = 0; j < 28; j++) {
+				vector_of_probabilities[i][j] = FindFeatureProbabilityFromClass(i, j, class_value, feature, map_label_to_image);
+			}
+		}
+		map_feature_probability.insert(pair<int, vector<vector<double>>>(class_value, vector_of_probabilities));
+	}
+	return map_feature_probability;
+}
+
