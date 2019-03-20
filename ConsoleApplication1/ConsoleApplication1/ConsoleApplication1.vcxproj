@@ -152,7 +152,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="NaiveBayes.cpp" />
+    <ClCompile Include="ImageLabelsData.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ImageLabelsData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
