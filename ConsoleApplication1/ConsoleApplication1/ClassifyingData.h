@@ -10,3 +10,4 @@ using namespace std;
 
 double CalculatePosteriorProbability(vector<vector<double>> vector_feature_probabilities);
 map<int, double> MapClassPosteriorProbabilities(map<int, double> map_label_priors, map<int, vector<vector<double>>> map_feature_probability);
+int EstimateImageClass(map<int, double> map_class_posterior_probabilities);

@@ -26,9 +26,9 @@ map<int, double> MapClassPosteriorProbabilities(map<int, double> map_label_prior
 	return map_class_posterior_probabilities;
 }
 
-int estimate_image_class(map<int, double> map_class_posterior_probabilities) {
+int EstimateImageClass(map<int, double> map_class_posterior_probabilities) {
 	int assigned_class = 0;
-	double max_posterior_probability = 0.0;
+	double max_posterior_probability = map_class_posterior_probabilities.begin()->second;
 
 	for (map<int, double>::iterator it = map_class_posterior_probabilities.begin(); it != map_class_posterior_probabilities.end(); ++it) {
 		int current_label = it->first;
@@ -42,4 +42,11 @@ int estimate_image_class(map<int, double> map_class_posterior_probabilities) {
 }
 
 //now map an estimated class to an image??
+/*map<int, vector<vector<int>>> MapEstimatedClassToImage(multimap<int, vector<vector<int>>> map_labels_to_images) {
+	map<int, vector<vector<int>>> map_estimated_class_to_image;
 
+	for (multimap<int, vector<vector<int>>>::iterator it = map_labels_to_images.begin(); it != map_labels_to_images.end(); ++it) {
+
+	}
+
+}*/

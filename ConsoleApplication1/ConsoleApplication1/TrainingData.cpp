@@ -23,6 +23,12 @@ map<int, double> MapLabelPriors(vector<int> training_labels) {
 		double prior_probability = CalculateLabelPriorProbability(i, training_labels);
 		map_label_priors.insert(pair<int, double>(i, prior_probability));
 	}
+
+	/*for (map<int, double>::iterator it = map_label_priors.begin(); it != map_label_priors.end(); ++it)
+	{
+		cout << it->first << " " << it->second << endl;
+	}*/
+
 	return map_label_priors;
 }
 
@@ -45,6 +51,7 @@ double FindFeatureProbabilityFromClass(int row, int col, int label, int feature,
 			vector<vector<int>> current_image = it->second;
 			//at position (row, column) in the current image 2d vector, 
 			if (current_image.at(row).at(col) == feature) {
+				//cout << "for class " << current_label << " at position " << row << ", " << col << "matches feature" << endl;
 				count_position_matches_feature++;
 			}
 		}
@@ -56,6 +63,7 @@ double FindFeatureProbabilityFromClass(int row, int col, int label, int feature,
 //create a map <int, vector<vector<double>>>
 //vector is of size 28x28, each element in vector is the feature probability of that position
 map<int, vector<vector<double>>> MapClassFeatureProbability(int feature, multimap <int, vector<vector<int>>> map_label_to_image) {
+	cout << "entering method" << endl;
 	map<int, vector<vector<double>>> map_feature_probability;
 	
 	for (int class_value = 0; class_value < 10; class_value++) {
@@ -63,9 +71,28 @@ map<int, vector<vector<double>>> MapClassFeatureProbability(int feature, multima
 		for (int i = 0; i < 28; i++) {
 			for (int j = 0; j < 28; j++) {
 				vector_of_probabilities[i][j] = FindFeatureProbabilityFromClass(i, j, class_value, feature, map_label_to_image);
+				cout << vector_of_probabilities[i][j] << " ";
 			}
+			cout << endl;
 		}
 		map_feature_probability.insert(pair<int, vector<vector<double>>>(class_value, vector_of_probabilities));
 	}
+	
+	for (map<int, vector<vector<double>>>::iterator it = map_feature_probability.begin(); it != map_feature_probability.end(); ++it) {
+		int class_value = it->first;
+		cout << class_value << endl;
+		cout << "For label " << class_value << " we have this vector of probabilities";
+		vector<vector<double>> vector_of_probabilities = it->second;
+		for (int i = 0; i < vector_of_probabilities.size(); i++) {
+			for (int j = 0; j < vector_of_probabilities[i].size(); j++) {
+				cout << vector_of_probabilities[i][j];
+			}
+			cout << endl;
+		}
+		cout << endl;
+	}
+
+
+
 	return map_feature_probability;
 }

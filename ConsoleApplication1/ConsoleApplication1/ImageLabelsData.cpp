@@ -17,7 +17,7 @@ vector<int> CreateVectorOfLabels(string file_name) {
 		//read file line by line, assuming each line is some integer
 		while (read_file >> label) {
 			vector_labels.push_back(label);
-			cout << label << endl;
+			//cout << label << endl;
 		}
 	}
 	read_file.close();
@@ -57,7 +57,7 @@ vector<vector<vector<int>>> CreateVectorOfImages(string file_name) {
 	}
 
 	//prints out the images
-	for (int i = 0; i < vector_image_features.size(); i++) {
+	/*for (int i = 0; i < vector_image_features.size(); i++) {
 		for (int j = 0; j < vector_image_features[i].size(); j++) {
 			for (int k = 0; k < vector_image_features[i][j].size(); k++) {
 				cout << vector_image_features[i][j][k];
@@ -65,7 +65,7 @@ vector<vector<vector<int>>> CreateVectorOfImages(string file_name) {
 			cout << endl;
 		}
 		cout << endl;
-	}
+	}*/
 	return vector_image_features;
 }
 
@@ -82,17 +82,6 @@ multimap<int, vector<vector<int>>> MapLabelsToImages(string labels_file, string 
 		map_label_to_image.insert(pair<int, vector<vector<int>>>(vector_of_labels.at(i), vector_of_images.at(i)));
 	}
 	return map_label_to_image;
-}
-
-
-int main()
-{
-    std::cout << "Hello World!\n"; 
-	string training_images = "C:\\Users\\kongt\\naivebayes-TinaKong83\\digitdata (1)\\trainingimages";
-	string training_labels = "C:\\Users\\kongt\\naivebayes-TinaKong83\\digitdata (1)\\traininglabels";
-
-	//CreateVectorOfLabels(training_labels);
-	//CreateVectorOfImages(training_images); 
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
