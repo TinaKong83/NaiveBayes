@@ -17,6 +17,7 @@ vector<int> CreateVectorOfLabels(string file_name) {
 		//read file line by line, assuming each line is some integer
 		while (read_file >> label) {
 			vector_labels.push_back(label);
+			cout << label << endl;
 		}
 	}
 	read_file.close();
@@ -33,14 +34,12 @@ vector<vector<vector<int>>> CreateVectorOfImages(string file_name) {
 		cout << "File is invalid." << endl;
 	} else {
 		char image_char;
-		/*for (int line_index = 0; line_index < vector_image_labels.size(); line_index++) {*/
 		while (!read_file.eof()) {
 			vector<vector<int>> single_image;
-
 			single_image.resize(28);
 			for (int i = 0; i < 28; i++) {
-				single_image[i].resize(28);
-				for (int j = 0; j < 28; j++) {
+				single_image[i].resize(29);
+				for (int j = 0; j < 29; j++) {
 					read_file.get(image_char);
 					if (image_char == '\n') {
 						continue;
@@ -54,8 +53,18 @@ vector<vector<vector<int>>> CreateVectorOfImages(string file_name) {
 				}
 			}
 			vector_image_features.push_back(single_image);
-			//line_index++;
 		}
+	}
+
+	//prints out the images
+	for (int i = 0; i < vector_image_features.size(); i++) {
+		for (int j = 0; j < vector_image_features[i].size(); j++) {
+			for (int k = 0; k < vector_image_features[i][j].size(); k++) {
+				cout << vector_image_features[i][j][k];
+			}
+			cout << endl;
+		}
+		cout << endl;
 	}
 	return vector_image_features;
 }
@@ -79,6 +88,11 @@ multimap<int, vector<vector<int>>> MapLabelsToImages(string labels_file, string 
 int main()
 {
     std::cout << "Hello World!\n"; 
+	string training_images = "C:\\Users\\kongt\\naivebayes-TinaKong83\\digitdata (1)\\trainingimages";
+	string training_labels = "C:\\Users\\kongt\\naivebayes-TinaKong83\\digitdata (1)\\traininglabels";
+
+	//CreateVectorOfLabels(training_labels);
+	//CreateVectorOfImages(training_images); 
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

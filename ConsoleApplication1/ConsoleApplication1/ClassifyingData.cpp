@@ -41,3 +41,5 @@ int estimate_image_class(map<int, double> map_class_posterior_probabilities) {
 	return assigned_class;
 }
 
+//now map an estimated class to an image??
+
