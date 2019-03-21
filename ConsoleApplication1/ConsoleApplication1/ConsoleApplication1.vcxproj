@@ -152,10 +152,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClassifyingData.cpp" />
     <ClCompile Include="ImageLabelsData.cpp" />
     <ClCompile Include="TrainingData.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClassifyingData.h" />
     <ClInclude Include="ImageLabelsData.h" />
     <ClInclude Include="TrainingData.h" />
   </ItemGroup>

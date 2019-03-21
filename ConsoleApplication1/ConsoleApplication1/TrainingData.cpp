@@ -1,9 +1,10 @@
 #include <iostream>
 #include "TrainingData.h"
+#include <math.h>
 using namespace std;
 
-//use formula for esimating priors
-double TrainingData::CalculateLabelPriorProbability(int label, vector<int> training_labels) {
+//use formula for estimating priors
+double CalculateLabelPriorProbability(int label, vector<int> training_labels) {
 	int label_count = 0;
 	for (int i = 0; i < training_labels.size(); i++) {
 		if (training_labels.at(i) == label) {
@@ -16,7 +17,7 @@ double TrainingData::CalculateLabelPriorProbability(int label, vector<int> train
 
 //Creates a map of size 10: each element in the map is a class (0 to 9) as the key,
 //and the prior probability of the class as the value
-map<int, double> TrainingData::MapLabelPriors(vector<int> training_labels) {
+map<int, double> MapLabelPriors(vector<int> training_labels) {
 	map<int, double> map_label_priors;
 	for (int i = 0; i < 10; i++) {
 		double prior_probability = CalculateLabelPriorProbability(i, training_labels);
@@ -29,7 +30,7 @@ map<int, double> TrainingData::MapLabelPriors(vector<int> training_labels) {
 //given an image that is a certain label
 //Use formula: P(Fi,j =f|class=c)= (k + # of times F(i,j) =f when class=c) / (2k + Total number of training examples where class = c)
 //multimap <int, vector<vector<int>>> map_label_to_image;
-double TrainingData::FindFeatureProbabilityFromClass(int row, int col, int label, int feature, 
+double FindFeatureProbabilityFromClass(int row, int col, int label, int feature, 
 	multimap <int, vector<vector<int>>> map_label_to_image) {
 
 	//loop through the training image labels (key in your map), finding occurances of it
@@ -54,7 +55,7 @@ double TrainingData::FindFeatureProbabilityFromClass(int row, int col, int label
 
 //create a map <int, vector<vector<double>>>
 //vector is of size 28x28, each element in vector is the feature probability of that position
-map<int, vector<vector<double>>> TrainingData::MapFeatureProbability(int feature, multimap <int, vector<vector<int>>> map_label_to_image) {
+map<int, vector<vector<double>>> MapClassFeatureProbability(int feature, multimap <int, vector<vector<int>>> map_label_to_image) {
 	map<int, vector<vector<double>>> map_feature_probability;
 	
 	for (int class_value = 0; class_value < 10; class_value++) {
@@ -68,4 +69,3 @@ map<int, vector<vector<double>>> TrainingData::MapFeatureProbability(int feature
 	}
 	return map_feature_probability;
 }
-

@@ -6,9 +6,8 @@
 using namespace std;
 
 //method that reads a file of integer labels. push each integer into a vector of image labels
-vector<int> ImageLabelsData::CreateVectorOfLabels(string file_name) {
+vector<int> CreateVectorOfLabels(string file_name) {
 	vector<int> vector_labels;
-	ImageLabelsData image_labels_data;
 	ifstream read_file;
 	read_file.open(file_name);
 	if (read_file.fail()) {
@@ -26,9 +25,8 @@ vector<int> ImageLabelsData::CreateVectorOfLabels(string file_name) {
 
 //method that reads a file of character images. 
 //returns a list of 2d vector images w/ binary features
-vector<vector<vector<int>>> ImageLabelsData::CreateVectorOfImages(string file_name) {
+vector<vector<vector<int>>> CreateVectorOfImages(string file_name) {
 	vector<vector<vector<int>>> vector_image_features;
-	ImageLabelsData image_labels_data;
 	ifstream read_file;
 	read_file.open(file_name);
 	if (read_file.fail()) {
@@ -67,7 +65,7 @@ vector<vector<vector<int>>> ImageLabelsData::CreateVectorOfImages(string file_na
 //key: class (as an int)
 //value: number-image as a (2d vector of chars)
 
-multimap<int, vector<vector<int>>> ImageLabelsData::MapLabelsToImages(string labels_file, string images_file) {
+multimap<int, vector<vector<int>>> MapLabelsToImages(string labels_file, string images_file) {
 	multimap <int, vector<vector<int>>> map_label_to_image;
 	vector<int> vector_of_labels = CreateVectorOfLabels(labels_file);
 	vector<vector<vector<int>>> vector_of_images = CreateVectorOfImages(images_file);
