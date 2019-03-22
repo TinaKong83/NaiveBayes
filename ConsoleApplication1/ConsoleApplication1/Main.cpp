@@ -14,7 +14,7 @@ int main()
 	//CreateVectorOfImages(training_images); 
 
 	vector<int> vector_training_labels = CreateVectorOfLabels(training_labels);
-	vector<vector<vector<int>>> vector_training_images = CreateVectorOfImages(training_images);
+	//vector<vector<vector<int>>> vector_training_images = CreateVectorOfImages(training_images);
 
 	multimap<int, vector<vector<int>>> map_labels_to_images = MapLabelsToImages(training_labels, training_images);
 
@@ -26,7 +26,17 @@ int main()
 	//double example_feature_probability = FindFeatureProbabilityFromClass(3, 2, 5, 1, map_labels_to_images);
 	//cout << example_feature_probability;
 
-	cout << "hello?";
 	map<int, vector<vector<double>>> map_class_feature_probability = MapClassFeatureProbability(0, map_labels_to_images);
+	map<int, double> map_label_priors = MapLabelPriors(vector_training_labels);
+
+	/*vector<vector<double>> vector_feature_probabilities_one_class = map_class_feature_probability.begin()->second;
+	double posterior_probability_one_class = CalculatePosteriorProbability(vector_feature_probabilities_one_class);
+	cout << posterior_probability_one_class << endl;*/
+
+	map<int, double> map_class_posterior_probabilities 
+		= MapClassPosteriorProbabilities(map_label_priors, map_class_feature_probability);
+
+	map<int, vector<vector<int>>> map_estimated_class_to_image 
+		= MapEstimatedClassToImage(map_labels_to_images, map_class_posterior_probabilities);
 
 }
