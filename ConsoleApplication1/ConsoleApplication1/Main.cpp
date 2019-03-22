@@ -10,33 +10,28 @@ int main()
 	string training_images = "C:\\Users\\kongt\\naivebayes-TinaKong83\\digitdata (1)\\trainingimages";
 	string training_labels = "C:\\Users\\kongt\\naivebayes-TinaKong83\\digitdata (1)\\traininglabels";
 
+	string test_images = "C:\\Users\\kongt\\naivebayes-TinaKong83\\digitdata (1)\\testimages";
+	string test_labels = "C:\\Users\\kongt\\naivebayes-TinaKong83\\digitdata (1)\\testlabels";
+
 	//CreateVectorOfLabels(training_labels);
 	//CreateVectorOfImages(training_images); 
+
+	vector<vector<vector<int>>> vector_test_images = CreateVectorOfImages(test_images);
 
 	vector<int> vector_training_labels = CreateVectorOfLabels(training_labels);
 	//vector<vector<vector<int>>> vector_training_images = CreateVectorOfImages(training_images);
 
 	multimap<int, vector<vector<int>>> map_labels_to_images = MapLabelsToImages(training_labels, training_images);
-
-	//using class = 5 as an example
-	//double label_prior_probability = CalculateLabelPriorProbability(5, vector_training_labels);
 	
-	//map<int, double> map_label_priors = MapLabelPriors(vector_training_labels);
-
-	//double example_feature_probability = FindFeatureProbabilityFromClass(3, 2, 5, 1, map_labels_to_images);
-	//cout << example_feature_probability;
-
-	map<int, vector<vector<double>>> map_class_feature_probability = MapClassFeatureProbability(0, map_labels_to_images);
+	map<int, vector<vector<double>>> map_class_feature_probability = MapClassFeatureProbability(1, map_labels_to_images);
 	map<int, double> map_label_priors = MapLabelPriors(vector_training_labels);
 
-	/*vector<vector<double>> vector_feature_probabilities_one_class = map_class_feature_probability.begin()->second;
-	double posterior_probability_one_class = CalculatePosteriorProbability(vector_feature_probabilities_one_class);
-	cout << posterior_probability_one_class << endl;*/
+	/*map<int, double> map_class_posterior_probabilities 
+		= MapClassPosteriorProbabilities(map_label_priors, map_class_feature_probability);*/
 
-	map<int, double> map_class_posterior_probabilities 
-		= MapClassPosteriorProbabilities(map_label_priors, map_class_feature_probability);
+	map<vector<vector<int>>, vector<double>> map_class_posterior_probabilities 
+		= MapClassPosteriorProbabilities(map_label_priors, map_class_feature_probability, vector_test_images);
 
-	map<int, vector<vector<int>>> map_estimated_class_to_image 
-		= MapEstimatedClassToImage(map_labels_to_images, map_class_posterior_probabilities);
+	map<vector<vector<int>>, int> map_image_to_estimated_class = MapImageToEstimatedClass(map_class_posterior_probabilities);
 
 }

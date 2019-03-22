@@ -9,7 +9,7 @@
 using namespace std;
 
 double CalculatePosteriorProbability(vector<vector<double>>& vector_feature_probabilities);
-map<int, double> MapClassPosteriorProbabilities(map<int, double>& map_label_priors, map<int, vector<vector<double>>>& map_feature_probability);
-int EstimateImageClass(map<int, double>& map_class_posterior_probabilities);
-map<int, vector<vector<int>>> MapEstimatedClassToImage(multimap<int, vector<vector<int>>>& map_labels_to_images,
-	map<int, double>& map_class_posterior_probabilities);
+map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(map<int, double>& map_label_priors,
+	map<int, vector<vector<double>>>& map_feature_probability, vector<vector<vector<int>>>& testing_images);
+map<vector<vector<int>>, int> MapImageToEstimatedClass(map<vector<vector<int>>, vector<double>>& map_class_posterior_probabilities);
+int EstimateImageClass(vector<double>& vector_posterior_probabilities_per_class);
