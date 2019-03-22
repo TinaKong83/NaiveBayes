@@ -36,20 +36,22 @@ map<int, double> MapLabelPriors(vector<int>& training_labels) {
 //given an image that is a certain label
 //Use formula: P(Fi,j =f|class=c)= (k + # of times F(i,j) =f when class=c) / (2k + Total number of training examples where class = c)
 //multimap <int, vector<vector<int>>> map_label_to_image;
-double FindFeatureProbabilityFromClass(int row, int col, int label, int feature, 
+double FindFeatureProbabilityFromClass(int row, int col, int label, 
 	multimap <int, vector<vector<int>>>& map_label_to_image) {
 
 	//loop through the training image labels (key in your map), finding occurances of it
+	int dark_pixel = 1;
 	int count_label_occurrence = map_label_to_image.count(label);
 	int count_position_matches_feature = 0;
 	
 	//now loop through your map map_label_to_image
+	//count_position_matches_feature looks for dark pixels only, so only stores feature probabiltiies of dark pixels for now
 	for (multimap<int, vector<vector<int>>>::iterator it = map_label_to_image.begin(); it != map_label_to_image.end(); ++it) {
 		//it->first gives you the key (the label)
 		int current_label = it->first;
 		if (current_label == label) {
 			vector<vector<int>> current_image = it->second;
-			if (current_image.at(row).at(col) == feature) {
+			if (current_image.at(row).at(col) == dark_pixel) {
 				count_position_matches_feature++;
 			}
 		}
@@ -60,7 +62,7 @@ double FindFeatureProbabilityFromClass(int row, int col, int label, int feature,
 
 //create a map <int, vector<vector<double>>>
 //vector is of size 28x28, each element in vector is the feature probability of that position
-map<int, vector<vector<double>>> MapClassFeatureProbability(int feature, multimap <int, vector<vector<int>>>& map_label_to_image) {
+map<int, vector<vector<double>>> MapClassFeatureProbability(multimap <int, vector<vector<int>>>& map_label_to_image) {
 	cout << "entering method" << endl;
 	map<int, vector<vector<double>>> map_feature_probability;
 	
@@ -70,7 +72,7 @@ map<int, vector<vector<double>>> MapClassFeatureProbability(int feature, multima
 		vector<vector<double>> vector_of_probabilities(28, vector<double>(28, 0.0));
 		for (int i = 0; i < 28; i++) {
 			for (int j = 0; j < 28; j++) {
-				vector_of_probabilities[i][j] = FindFeatureProbabilityFromClass(i, j, class_value, feature, map_label_to_image);
+				vector_of_probabilities[i][j] = FindFeatureProbabilityFromClass(i, j, class_value, map_label_to_image);
 				cout << vector_of_probabilities[i][j] << " ";
 			}
 			cout << endl;

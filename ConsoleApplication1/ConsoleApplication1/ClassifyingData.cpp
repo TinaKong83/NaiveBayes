@@ -50,14 +50,32 @@ map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(map<int,
 		for (map<int, vector<vector<double>>>::iterator it = map_feature_probability.begin(); it != map_feature_probability.end(); ++it) {
 			int current_label = it->first;
 			vector<vector<double>> vector_feature_probabilities = it->second;
+			vector<vector<double>> set_vector_feature_probabilities = SetImageTestFeatureProbabilities(current_image, vector_feature_probabilities);
+
 			double posterior_probability = log(map_label_priors.find(current_label)->second)
-				+ CalculatePosteriorProbability(vector_feature_probabilities);
+				+ CalculatePosteriorProbability(set_vector_feature_probabilities);
 			cout << "posterior proability is: " << posterior_probability << endl;
 			vector_test_probabilities.push_back(posterior_probability);
 		}
 		map_class_posterior_probabilities.insert(pair<vector<vector<int>>, vector<double>>(current_image, vector_test_probabilities));
 	}
 	return map_class_posterior_probabilities;
+}
+
+vector<vector<double>> SetImageTestFeatureProbabilities(vector<vector<int>>& current_image, vector<vector<double>>& vector_feature_probabilities) {
+	vector<vector<double>> set_vector_feature_probabilities(28, vector<double>(28, 0.0));
+
+	for (int i = 0; i < 28; i++) {
+		for (int j = 0; j < 28; j++) {
+			if (current_image[i][j] == 1) {
+				set_vector_feature_probabilities[i][j] = vector_feature_probabilities[i][j];
+			}
+			else if (current_image[i][j] == 0) {
+				set_vector_feature_probabilities[i][j] = 1.0 - (vector_feature_probabilities[i][j]);
+			}
+		}
+	}
+	return set_vector_feature_probabilities;
 }
 
 //key: image

@@ -23,15 +23,11 @@ int main()
 
 	multimap<int, vector<vector<int>>> map_labels_to_images = MapLabelsToImages(training_labels, training_images);
 	
-	map<int, vector<vector<double>>> map_class_feature_probability = MapClassFeatureProbability(1, map_labels_to_images);
+	map<int, vector<vector<double>>> map_class_feature_probability = MapClassFeatureProbability(map_labels_to_images);
 	map<int, double> map_label_priors = MapLabelPriors(vector_training_labels);
-
-	/*map<int, double> map_class_posterior_probabilities 
-		= MapClassPosteriorProbabilities(map_label_priors, map_class_feature_probability);*/
 
 	map<vector<vector<int>>, vector<double>> map_class_posterior_probabilities 
 		= MapClassPosteriorProbabilities(map_label_priors, map_class_feature_probability, vector_test_images);
 
 	map<vector<vector<int>>, int> map_image_to_estimated_class = MapImageToEstimatedClass(map_class_posterior_probabilities);
-
 }
