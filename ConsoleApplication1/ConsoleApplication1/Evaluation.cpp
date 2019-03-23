@@ -25,6 +25,32 @@ vector<vector<double>> GenerateConfusionMatrix(map<vector<vector<int>>, int> map
 
 }
 
+//Given all of your testing images: Now map the estimated class to the image's actual class
+multimap<int, int> MapEstimatedClassToActualClass(map<vector<vector<int>>, int> map_image_to_estimated_class, 
+	map<vector<vector<int>>, int> map_test_image_to_actual_class) {
+
+	multimap<int, int> map_actual_class_to_estimated;
+	for (map<vector<vector<int>>, int>::iterator it = map_image_to_estimated_class.begin(); it != map_image_to_estimated_class.end(); ++it) {
+		vector<vector<int>> current_image = it->first;
+		int estimated_class = it->second;
+		int actual_class = map_test_image_to_actual_class[current_image];
+		map_actual_class_to_estimated.insert(pair<int, int>(actual_class, estimated_class));
+	}
+	return map_actual_class_to_estimated;
+}
+
+int CountImagesFromRowInCol(int row, int col, multimap<int, int> map_actual_class_to_estimated) {
+	int count_num_images_from_r_estimated_in_c;
+	for (multimap<int, int>::iterator it = map_actual_class_to_estimated.begin(); it != map_actual_class_to_estimated.end(); ++it) {
+		int actual_class = it->first;
+		int estimated_class = it->second;
+		if (actual_class == row && estimated_class == col) {
+			count_num_images_from_r_estimated_in_c++;
+		}
+	}
+	return count_num_images_from_r_estimated_in_c;
+}
+
 
 //e.g. (r, c) = (3, 1)
 //num of images actually from class 3, but predicted to be in class 1
@@ -36,7 +62,7 @@ vector<vector<double>> GenerateConfusionMatrix(map<vector<vector<int>>, int> map
 // int count_num_images_from_r_estimated_in_c;
 //for (loop through map.....) {
 //   if (it->second = row) {
-//      if (it->second = col) {
+//      if (it->first = col) {
 //         count_num_images_from_r_estimated_in_c++;
 //      }
 //   }

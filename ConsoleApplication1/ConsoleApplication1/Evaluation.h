@@ -7,4 +7,4 @@
 #include <fstream>
 using namespace std;
 
-vector<vector<double>> GenerateConfusionMatrix();
+//vector<vector<double>> GenerateConfusionMatrix();
