@@ -40,7 +40,7 @@ double FindFeatureProbabilityFromClass(int row, int col, int label,
 	multimap <int, vector<vector<int>>>& map_label_to_image) {
 
 	//loop through the training image labels (key in your map), finding occurances of it
-	int dark_pixel = 1;
+	//int dark_pixel = 1;
 	int count_label_occurrence = map_label_to_image.count(label);
 	int count_position_matches_feature = 0;
 	
@@ -51,7 +51,7 @@ double FindFeatureProbabilityFromClass(int row, int col, int label,
 		int current_label = it->first;
 		if (current_label == label) {
 			vector<vector<int>> current_image = it->second;
-			if (current_image.at(row).at(col) == dark_pixel) {
+			if (current_image.at(row).at(col) == 0) {
 				count_position_matches_feature++;
 			}
 		}
