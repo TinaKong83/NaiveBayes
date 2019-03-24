@@ -86,12 +86,12 @@ int EstimateImageClass(vector<double>& vector_posterior_probabilities_per_class)
 	return estimated_class;
 }
 
-map<vector<vector<int>>, int> MapTestImageToActualClass(vector<vector<vector<int>>> test_images, vector<int> test_labels) {
+map<vector<vector<int>>, int> MapTestImageToActualClass(vector<vector<vector<int>>>& test_images, vector<int>& test_labels) {
 	map<vector<vector<int>>, int> map_test_image_to_actual_class;
 	
 	for (int i = 0; i < test_images.size(); i++) {
-		vector<vector<int>> current_image = test_images[i];
-		int correct_test_label = test_labels[i];
+		vector<vector<int>> current_image = test_images.at(i);
+		int correct_test_label = test_labels.at(i);
 		map_test_image_to_actual_class.insert(pair<vector<vector<int>>, int>(current_image, correct_test_label));
 	}
 	return map_test_image_to_actual_class;

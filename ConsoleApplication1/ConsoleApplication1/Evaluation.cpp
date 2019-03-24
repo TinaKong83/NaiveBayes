@@ -17,7 +17,7 @@ multimap<int, int> MapActualClassToEstimated(map<vector<vector<int>>, int>& map_
 }
 
 int CountImagesFromRowInCol(int row, int col, multimap<int, int>& map_actual_class_to_estimated) {
-	int count_num_images_from_r_estimated_in_c;
+	int count_num_images_from_r_estimated_in_c = 0;
 	for (multimap<int, int>::iterator it = map_actual_class_to_estimated.begin(); it != map_actual_class_to_estimated.end(); ++it) {
 		int actual_class = it->first;
 		int estimated_class = it->second;

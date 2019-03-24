@@ -55,6 +55,7 @@ vector<vector<vector<int>>> CreateVectorOfImages(string file_name) {
 			vector_image_features.push_back(single_image);
 		}
 	}
+	vector_image_features.pop_back();
 
 	//prints out the images
 	/*for (int i = 0; i < vector_image_features.size(); i++) {
