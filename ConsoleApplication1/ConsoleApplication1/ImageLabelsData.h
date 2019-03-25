@@ -15,7 +15,8 @@ using namespace std;
 vector<int> CreateVectorOfLabels(string file_name);
 vector<vector<vector<int>>> CreateVectorOfImages(string file_name);
 
-multimap<int, vector<vector<int>>> MapLabelsToImages(string labels_file, string images_file);
+multimap<int, vector<vector<int>>> MapLabelsToImages(vector<int> vector_of_labels, 
+	vector<vector<vector<int>>> vector_of_images);
 
 //list of 2d char vectors (each 2d vector is a single image)
 //single 3d vector represents list of all the images in a file

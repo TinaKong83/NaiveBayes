@@ -14,7 +14,7 @@ double CalculatePosteriorProbability(vector<vector<double>>& vector_feature_prob
 
 //key: image
 //value: posterior probability per class for that image
-map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(map<int, double>& map_label_priors,
+/*map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(map<int, double>& map_label_priors,
 	map<int, vector<vector<double>>>& map_feature_probability, vector<vector<vector<int>>>& testing_images) {
 
 	map<vector<vector<int>>, vector<double>> map_class_posterior_probabilities;
@@ -37,9 +37,35 @@ map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(map<int,
 		map_class_posterior_probabilities.insert(pair<vector<vector<int>>, vector<double>>(current_image, vector_test_probabilities));
 	}
 	return map_class_posterior_probabilities;
+}*/
+
+map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(vector<double>& vector_label_priors,
+	vector<vector<vector<double>>>& vector_class_feature_probability, vector<vector<vector<int>>>& testing_images) {
+
+	map<vector<vector<int>>, vector<double>> map_class_posterior_probabilities;
+
+	for (int i = 0; i < testing_images.size(); i++) {
+		vector<vector<int>> current_image = testing_images[i];
+		vector<double> vector_test_probabilities;
+
+		for (int j = 0; j < vector_class_feature_probability.size(); j++) {
+			int current_label = j;
+			vector<vector<double>> vector_feature_probabilities_of_a_class = vector_class_feature_probability[j];
+			vector<vector<double>> set_vector_feature_probabilities = 
+				SetImageTestFeatureProbabilities(current_image, vector_feature_probabilities_of_a_class);
+
+			double posterior_probability = log(vector_label_priors[current_label])
+				+ CalculatePosteriorProbability(set_vector_feature_probabilities);
+			//cout << "posterior proability is: " << posterior_probability << endl;
+			vector_test_probabilities.push_back(posterior_probability);
+		}
+		map_class_posterior_probabilities.insert(pair<vector<vector<int>>, vector<double>>(current_image, vector_test_probabilities));
+	}
+	return map_class_posterior_probabilities;
 }
 
-vector<vector<double>> SetImageTestFeatureProbabilities(vector<vector<int>>& current_image, vector<vector<double>>& vector_feature_probabilities) {
+vector<vector<double>> SetImageTestFeatureProbabilities(vector<vector<int>>& current_image, 
+	vector<vector<double>>& vector_feature_probabilities) {
 	vector<vector<double>> set_vector_feature_probabilities(28, vector<double>(28, 0.0));
 
 	for (int i = 0; i < 28; i++) {
@@ -71,6 +97,17 @@ map<vector<vector<int>>, int> MapImageToEstimatedClass(map<vector<vector<int>>, 
 	return map_image_to_estimated_class;
 }
 
+/*vector<int> VectorTestImageEstimatedClasses(map<vector<vector<int>>, vector<double>>& map_class_posterior_probabilities) {
+	vector<int> test_image_estimated_classes;
+	for (map<vector<vector<int>>, vector<double>>::iterator it = map_class_posterior_probabilities.begin(); it != map_class_posterior_probabilities.end(); ++it) {
+		vector<double> vector_posterior_probabilities_per_class = it->second;
+		int estimated_class = EstimateImageClass(vector_posterior_probabilities_per_class);
+		test_image_estimated_classes.push_back(estimated_class);
+		//cout << "estimated class: " << estimated_class << endl;
+	}
+	return test_image_estimated_classes;
+}*/
+
 int EstimateImageClass(vector<double>& vector_posterior_probabilities_per_class) {
 	int estimated_class = 0;
 	double max_posterior_probability = vector_posterior_probabilities_per_class.at(0);
@@ -87,6 +124,7 @@ int EstimateImageClass(vector<double>& vector_posterior_probabilities_per_class)
 }
 
 map<vector<vector<int>>, int> MapTestImageToActualClass(vector<vector<vector<int>>>& test_images, vector<int>& test_labels) {
+
 	map<vector<vector<int>>, int> map_test_image_to_actual_class;
 	
 	for (int i = 0; i < test_images.size(); i++) {
@@ -97,4 +135,3 @@ map<vector<vector<int>>, int> MapTestImageToActualClass(vector<vector<vector<int
 	return map_test_image_to_actual_class;
 }
 
-//use printf to only have 2 decimal points

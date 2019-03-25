@@ -65,15 +65,15 @@ vector<vector<vector<int>>> CreateVectorOfImages(string file_name) {
 //key: class (as an int)
 //value: number-image as a (2d vector of chars)
 
-multimap<int, vector<vector<int>>> MapLabelsToImages(string labels_file, string images_file) {
+/*multimap<int, vector<vector<int>>> MapLabelsToImages(vector<int> vector_of_labels, vector<vector<vector<int>>> vector_of_images) {
 	multimap <int, vector<vector<int>>> map_label_to_image;
-	vector<int> vector_of_labels = CreateVectorOfLabels(labels_file);
-	vector<vector<vector<int>>> vector_of_images = CreateVectorOfImages(images_file);
+	//vector<int> vector_of_labels = CreateVectorOfLabels(labels_file);
+	//vector<vector<vector<int>>> vector_of_images = CreateVectorOfImages(images_file);
 	for (int i = 0; i < vector_of_labels.size(); i++) {
 		map_label_to_image.insert(pair<int, vector<vector<int>>>(vector_of_labels.at(i), vector_of_images.at(i)));
 	}
 	return map_label_to_image;
-}
+}*/
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

@@ -16,6 +16,19 @@ multimap<int, int> MapActualClassToEstimated(map<vector<vector<int>>, int>& map_
 	return map_actual_class_to_estimated;
 }
 
+/*multimap<int, int> MapActualClassToEstimated(vector<int>& vector_test_estimated_classes,
+	vector<int>& vector_actual_test_classes) {
+
+	multimap<int, int> map_actual_class_to_estimated;
+
+	for (int i = 0; i < vector_actual_test_classes.size(); i++) {
+		int actual_class = vector_actual_test_classes.at(i);
+		int estimated_class = vector_test_estimated_classes.at(i);
+		map_actual_class_to_estimated.insert(pair<int, int>(actual_class, estimated_class));
+	}
+	return map_actual_class_to_estimated;
+}*/
+
 int CountImagesFromRowInCol(int row, int col, multimap<int, int>& map_actual_class_to_estimated) {
 	int count_num_images_from_r_estimated_in_c = 0;
 	for (multimap<int, int>::iterator it = map_actual_class_to_estimated.begin(); it != map_actual_class_to_estimated.end(); ++it) {
@@ -32,9 +45,8 @@ vector<vector<double>> GenerateConfusionMatrix(multimap<int, int>& map_actual_cl
 	vector<vector<double>> confusion_matrix(10, vector<double>(10, 0.0));
 	for (int r = 0; r < 10; r++) {
 		for (int c = 0; c < 10; c++) {
-			//# images actually from class r?
 			double count_images_actually_from_r = map_actual_class_to_estimated.count(r);
-			confusion_matrix[r][c] = (double)CountImagesFromRowInCol(r, c, map_actual_class_to_estimated) / count_images_actually_from_r;
+			confusion_matrix[r][c] = (double) CountImagesFromRowInCol(r, c, map_actual_class_to_estimated) / count_images_actually_from_r;
 		}
 	}
 	return confusion_matrix;
