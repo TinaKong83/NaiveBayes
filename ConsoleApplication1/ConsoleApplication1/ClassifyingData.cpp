@@ -14,9 +14,9 @@ double CalculatePosteriorProbability(vector<vector<double>>& vector_feature_prob
 
 //key: image
 //value: posterior probability per class for that image
-map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(map<int, double>& map_label_priors, 
+map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(map<int, double>& map_label_priors,
 	map<int, vector<vector<double>>>& map_feature_probability, vector<vector<vector<int>>>& testing_images) {
-	
+
 	map<vector<vector<int>>, vector<double>> map_class_posterior_probabilities;
 
 	for (int i = 0; i < testing_images.size(); i++) {
@@ -28,7 +28,7 @@ map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(map<int,
 			vector<vector<double>> vector_feature_probabilities = it->second;
 			vector<vector<double>> set_vector_feature_probabilities = SetImageTestFeatureProbabilities(current_image, vector_feature_probabilities);
 
-			double posterior_probability = log(map_label_priors[current_label]) 
+			double posterior_probability = log(map_label_priors[current_label])
 				+ CalculatePosteriorProbability(set_vector_feature_probabilities);
 			//PrintVector(set_vector_feature_probabilities);
 			cout << "posterior proability is: " << posterior_probability << endl;
@@ -97,3 +97,4 @@ map<vector<vector<int>>, int> MapTestImageToActualClass(vector<vector<vector<int
 	return map_test_image_to_actual_class;
 }
 
+//use printf to only have 2 decimal points

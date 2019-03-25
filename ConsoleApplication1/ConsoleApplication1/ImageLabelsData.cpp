@@ -57,16 +57,6 @@ vector<vector<vector<int>>> CreateVectorOfImages(string file_name) {
 	}
 	vector_image_features.pop_back();
 
-	//prints out the images
-	/*for (int i = 0; i < vector_image_features.size(); i++) {
-		for (int j = 0; j < vector_image_features[i].size(); j++) {
-			for (int k = 0; k < vector_image_features[i][j].size(); k++) {
-				cout << vector_image_features[i][j][k];
-			}
-			cout << endl;
-		}
-		cout << endl;
-	}*/
 	return vector_image_features;
 }
 

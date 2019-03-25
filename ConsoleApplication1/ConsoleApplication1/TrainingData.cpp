@@ -23,12 +23,6 @@ map<int, double> MapLabelPriors(vector<int>& training_labels) {
 		double prior_probability = CalculateLabelPriorProbability(i, training_labels);
 		map_label_priors.insert(pair<int, double>(i, prior_probability));
 	}
-
-	/*for (map<int, double>::iterator it = map_label_priors.begin(); it != map_label_priors.end(); ++it)
-	{
-		cout << it->first << " " << it->second << endl;
-	}*/
-
 	return map_label_priors;
 }
 
@@ -62,18 +56,24 @@ double FindFeatureProbabilityFromClass(int row, int col, int label,
 
 //create a map <int, vector<vector<double>>>
 //vector is of size 28x28, each element in vector is the feature probability of that position
-map<int, vector<vector<double>>> MapClassFeatureProbability(multimap <int, vector<vector<int>>>& map_label_to_image) {
-	cout << "entering method" << endl;
+map<int, vector<vector<double>>> MapClassFeatureProbability(multimap <int, vector<vector<int>>>& map_label_to_image, string file_name) {
+	std::ofstream output_file;
+	output_file.open(file_name);
+
+	if (output_file.fail()) {
+		cout << "File is invalid." << endl;
+	}
 	map<int, vector<vector<double>>> map_feature_probability;
-	
+
 	for (int class_value = 0; class_value < 10; class_value++) {
 		cout << endl;
-		cout << "I AM IN CLASS: " << class_value << endl;
+		//cout << "I AM IN CLASS: " << class_value << endl;
 		vector<vector<double>> vector_of_probabilities(28, vector<double>(28, 0.0));
 		for (int i = 0; i < 28; i++) {
 			for (int j = 0; j < 28; j++) {
 				vector_of_probabilities[i][j] = FindFeatureProbabilityFromClass(i, j, class_value, map_label_to_image);
-				cout << vector_of_probabilities[i][j] << " ";
+				//cout << vector_of_probabilities[i][j] << " ";
+				output_file << vector_of_probabilities[i][j] << " ";
 			}
 			cout << endl;
 		}
@@ -81,3 +81,47 @@ map<int, vector<vector<double>>> MapClassFeatureProbability(multimap <int, vecto
 	}
 	return map_feature_probability;
 }
+
+//Writing label prior prob to file
+double WriteLabelPriorProbabilitiesToFile(map<int, double> map_label_priors, string file_name) {
+	cout << "hi riya";
+	std::ofstream output_file;
+	output_file.open(file_name);
+
+	if (output_file.fail()) {
+		cout << "File is invalid." << endl;
+	}
+	else {
+		for (map<int, double>::iterator it = map_label_priors.begin(); it != map_label_priors.end(); ++it) {
+			output_file << it->first << " " << it->second << endl;
+		}
+	}
+	return 0.0;
+}
+
+double WriteClassWhiteFeatureProbability(map<int, vector<vector<double>>> map_class_feature_probability, string file_name) {
+	std::ofstream output_file;
+	output_file.open(file_name);
+
+	if (output_file.fail()) {
+		cout << "File is invalid." << endl;
+	}
+	else {
+		for (map<int, vector<vector<double>>>::iterator it = map_class_feature_probability.begin(); 
+			it != map_class_feature_probability.end(); ++it) {
+
+			output_file << it->first << endl; 
+			vector<vector<double>> current_image_probabilities = it->second;
+			for (int i = 0; i < 28; i++) {
+				for (int j = 0; j < 28; j++) {
+					output_file << current_image_probabilities[i][j] << " " << endl;
+				}
+			}
+			cout << endl;
+		}
+		cout << endl;
+	}
+	return 0.0;
+}
+//map<int, vector<vector<double>>> MapClassFeatureProbability
+

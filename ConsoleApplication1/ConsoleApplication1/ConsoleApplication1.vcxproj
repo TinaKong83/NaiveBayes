@@ -164,6 +164,10 @@
     <ClInclude Include="ImageLabelsData.h" />
     <ClInclude Include="TrainingData.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\..\naivebayes-TinaKong83\MapLabelPriors.txt" />
+    <Text Include="..\..\..\..\..\naivebayes-TinaKong83\WriteClassWhiteFeatureProb.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

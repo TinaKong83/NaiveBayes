@@ -7,12 +7,15 @@
 #include <fstream>
 using namespace std;
 
-multimap<int, vector<vector<int>>> MapLabelsToImages(string labels_file, string images_file);
+//multimap<int, vector<vector<int>>> MapLabelsToImages(string labels_file, string images_file);
+
 //vector<int> vector_image_labels;
 //vector<vector<int>> single_image;
 
 vector<int> CreateVectorOfLabels(string file_name);
 vector<vector<vector<int>>> CreateVectorOfImages(string file_name);
+
+multimap<int, vector<vector<int>>> MapLabelsToImages(string labels_file, string images_file);
 
 //list of 2d char vectors (each 2d vector is a single image)
 //single 3d vector represents list of all the images in a file
