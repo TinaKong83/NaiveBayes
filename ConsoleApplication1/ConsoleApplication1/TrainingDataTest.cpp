@@ -1,7 +1,9 @@
 #pragma once
 #define CATCH_CONFIG_MAIN
 #include "catch.h"
-#include "TrainingData.h";
+#include "TrainingData.h"
+#include <iostream>
+using namespace std;
 
 TEST_CASE("Find label prior probability calculations") {
 	//string labels_test_file = "C:\\Users\\kongt\\naivebayes-TinaKong83\\CreateLabelsTestCase.txt";

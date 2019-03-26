@@ -1,7 +1,9 @@
 #pragma once
 #define CATCH_CONFIG_MAIN
 #include "catch.h"
-#include "ImageLabelsData.h";
+#include "ImageLabelsData.h"
+#include <iostream>
+using namespace std;
 
 TEST_CASE("Checks if vector of labels is created") {
 	string labels_test_file = "C:\\Users\\kongt\\naivebayes-TinaKong83\\CreateLabelsTestCase.txt";
