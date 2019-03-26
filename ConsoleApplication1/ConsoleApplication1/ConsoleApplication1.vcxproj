@@ -155,17 +155,22 @@
     <ClCompile Include="ClassifyingData.cpp" />
     <ClCompile Include="Evaluation.cpp" />
     <ClCompile Include="ImageLabelsData.cpp" />
+    <ClCompile Include="ImageLabelsDataTest.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TrainingData.cpp" />
+    <ClCompile Include="TrainingDataTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="catch.h" />
     <ClInclude Include="ClassifyingData.h" />
     <ClInclude Include="Evaluation.h" />
     <ClInclude Include="ImageLabelsData.h" />
     <ClInclude Include="TrainingData.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\..\..\..\naivebayes-TinaKong83\CreateLabelsTestCase.txt" />
     <Text Include="..\..\..\..\..\naivebayes-TinaKong83\MapLabelPriors.txt" />
+    <Text Include="..\..\..\..\..\naivebayes-TinaKong83\WriteClassBlackFeatureProb.txt" />
     <Text Include="..\..\..\..\..\naivebayes-TinaKong83\WriteClassWhiteFeatureProb.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

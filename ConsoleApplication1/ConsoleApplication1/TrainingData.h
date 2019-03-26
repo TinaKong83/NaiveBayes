@@ -15,7 +15,7 @@ double FindFeatureProbabilityFromClass(int row, int col, int label,
 	vector<vector<vector<int>>>& vector_of_images, vector<int>& vector_of_labels);
 
 vector<vector<vector<double>>> VectorClassFeatureProbability(vector<vector<vector<int>>>& vector_of_images,
-	vector<int>& vector_of_labels, string file_name);
+	vector<int>& vector_of_labels, string file_name, string second_file_name);
 
 double WriteLabelPriorProbabilitiesToFile(vector<double>& vector_label_priors, string file_name);
 

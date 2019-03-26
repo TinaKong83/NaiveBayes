@@ -15,17 +15,16 @@ int main()
 
 	vector<vector<vector<int>>> vector_test_images = CreateVectorOfImages(test_images);
 	vector<int> vector_test_labels = CreateVectorOfLabels(test_labels);
-
 	vector<vector<vector<int>>> vector_training_images = CreateVectorOfImages(training_images);
 	vector<int> vector_training_labels = CreateVectorOfLabels(training_labels);
 
+	string black_features_file = "C:\\Users\\kongt\\naivebayes-TinaKong83\\WriteClassBlackFeatureProb.txt";
 	string white_features_file = "C:\\Users\\kongt\\naivebayes-TinaKong83\\WriteClassWhiteFeatureProb.txt";
 
 	vector<vector<vector<double>>> vector_class_feature_probability = 
-		VectorClassFeatureProbability(vector_training_images, vector_training_labels, white_features_file);
+		VectorClassFeatureProbability(vector_training_images, vector_training_labels, white_features_file, black_features_file);
 
 	vector<double> vector_label_priors = VectorLabelPriors(vector_training_labels);
-
 	string vector_label_priors_file = "C:\\Users\\kongt\\naivebayes-TinaKong83\\MapLabelPriors.txt";
 	WriteLabelPriorProbabilitiesToFile(vector_label_priors, vector_label_priors_file);
 

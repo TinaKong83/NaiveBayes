@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{9b41fd26-20e6-43f7-9597-a46f6dc5e2a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageLabelsData.cpp">
@@ -30,6 +33,12 @@
     <ClCompile Include="Evaluation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ImageLabelsDataTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingDataTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageLabelsData.h">
@@ -44,12 +53,21 @@
     <ClInclude Include="Evaluation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="catch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\naivebayes-TinaKong83\MapLabelPriors.txt">
       <Filter>Source Files</Filter>
     </Text>
     <Text Include="..\..\..\..\..\naivebayes-TinaKong83\WriteClassWhiteFeatureProb.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="..\..\..\..\..\naivebayes-TinaKong83\WriteClassBlackFeatureProb.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="..\..\..\..\..\naivebayes-TinaKong83\CreateLabelsTestCase.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
