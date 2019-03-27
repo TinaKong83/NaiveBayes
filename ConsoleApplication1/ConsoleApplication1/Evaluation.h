@@ -5,7 +5,10 @@
 #include <string>
 #include <iterator>
 #include <fstream>
-using namespace std;
+using std::map;
+using std::string;
+using std::vector;
+using std::multimap;
 
 multimap<int, int> MapActualClassToEstimated(map<vector<vector<int>>, int>& map_test_image_to_estimated_class,
 	map<vector<vector<int>>, int>& map_test_image_to_actual_class);

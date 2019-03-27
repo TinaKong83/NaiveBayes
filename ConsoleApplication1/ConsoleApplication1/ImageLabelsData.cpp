@@ -6,15 +6,14 @@
 #include "TrainingData.h"
 #include "ClassifyingData.h"
 #include "Evaluation.h"
-using namespace std;
 
 //Method that reads a file of integer labels. Push each integer into a vector of image labels
 vector<int> CreateVectorOfLabels(string file_name) {
 	vector<int> vector_labels;
-	ifstream read_file;
+	std::ifstream read_file;
 	read_file.open(file_name);
 	if (read_file.fail()) {
-		cout << "File is invalid." << endl;
+		std::cout << "File is invalid." << std::endl;
 	} else {
 		int label;
 		//read file line by line, assuming each line is some integer
@@ -29,10 +28,10 @@ vector<int> CreateVectorOfLabels(string file_name) {
 //Method that reads a file of character images. Returns a list of 2d vector images with binary features
 vector<vector<vector<int>>> CreateVectorOfImages(string file_name) {
 	vector<vector<vector<int>>> vector_image_features;
-	ifstream read_file;
+	std::ifstream read_file;
 	read_file.open(file_name);
 	if (read_file.fail()) {
-		cout << "File is invalid." << endl;
+		std::cout << "File is invalid." << std::endl;
 	} else {
 		char image_char;
 		while (!read_file.eof()) {

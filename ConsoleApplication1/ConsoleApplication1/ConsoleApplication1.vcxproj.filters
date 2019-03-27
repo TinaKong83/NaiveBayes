@@ -39,6 +39,9 @@
     <ClCompile Include="TrainingDataTest.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="ClassifyingDataTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageLabelsData.h">

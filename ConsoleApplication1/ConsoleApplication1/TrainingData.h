@@ -5,7 +5,11 @@
 #include <string>
 #include <iterator>
 #include <fstream>
-using namespace std;
+#include <math.h>
+
+using std::map;
+using std::string;
+using std::vector;
 
 double CalculateLabelPriorProbability(int label, vector<int>& training_labels);
 

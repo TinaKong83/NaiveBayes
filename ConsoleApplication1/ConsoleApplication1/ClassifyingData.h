@@ -6,7 +6,11 @@
 #include <string>
 #include <iterator>
 #include <fstream>
-using namespace std;
+#include <string>
+using std::map;
+using std::string;
+using std::vector;
+
 
 double CalculatePosteriorProbability(vector<vector<double>>& vector_feature_probabilities);
 

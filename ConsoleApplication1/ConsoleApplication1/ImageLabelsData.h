@@ -5,7 +5,9 @@
 #include <string>
 #include <iterator>
 #include <fstream>
-using namespace std;
+using std::map;
+using std::string;
+using std::vector;
 
 vector<int> CreateVectorOfLabels(string file_name);
 vector<vector<vector<int>>> CreateVectorOfImages(string file_name);

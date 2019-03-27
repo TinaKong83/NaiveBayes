@@ -1,7 +1,5 @@
 #include <iostream>
 #include "TrainingData.h"
-#include <math.h>
-using namespace std;
 
 //Calculates the prior probability of a label
 double CalculateLabelPriorProbability(int label, vector<int>& training_labels) {
@@ -58,7 +56,7 @@ vector<vector<vector<double>>> VectorClassFeatureProbability(vector<vector<vecto
 	black_feature_file.open(second_file_name);
 
 	if (white_feature_file.fail() || black_feature_file.fail()) {
-		cout << "File is invalid." << endl;
+		std::cout << "File is invalid." << std::endl;
 	}
 	vector<vector<vector<double>>> vector_class_feature_probabilities;
 
@@ -70,7 +68,7 @@ vector<vector<vector<double>>> VectorClassFeatureProbability(vector<vector<vecto
 				white_feature_file << vector_of_probabilities[i][j] << " ";
 				black_feature_file << 1.0 - vector_of_probabilities[i][j] << " ";
 			}
-			cout << endl;
+			std::cout << std::endl;
 		}
 		vector_class_feature_probabilities.push_back(vector_of_probabilities);
 	}
@@ -83,11 +81,11 @@ double WriteLabelPriorProbabilitiesToFile(vector<double>& vector_label_priors, s
 	output_file.open(file_name);
 
 	if (output_file.fail()) {
-		cout << "File is invalid." << endl;
+		std::cout << "File is invalid." << std::endl;
 	}
 	else {
 		for (int i = 0; i < vector_label_priors.size(); i++) {
-			output_file << i << " " << vector_label_priors.at(i) << endl;
+			output_file << i << " " << vector_label_priors.at(i) << std::endl;
 		}
 	}
 	return 0.0;

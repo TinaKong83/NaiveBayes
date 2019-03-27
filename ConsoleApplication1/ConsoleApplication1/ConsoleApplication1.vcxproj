@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClassifyingData.cpp" />
+    <ClCompile Include="ClassifyingDataTest.cpp" />
     <ClCompile Include="Evaluation.cpp" />
     <ClCompile Include="ImageLabelsData.cpp" />
     <ClCompile Include="ImageLabelsDataTest.cpp" />

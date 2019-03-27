@@ -1,6 +1,5 @@
 #include <iostream>
 #include "ClassifyingData.h"
-using namespace std;
 
 //Calculates the posterior probabilities of a class
 double CalculatePosteriorProbability(vector<vector<double>>& vector_feature_probabilities) {
@@ -21,7 +20,6 @@ map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(vector<d
 	for (int i = 0; i < testing_images.size(); i++) {
 		vector<vector<int>> current_image = testing_images[i];
 		vector<double> vector_test_probabilities;
-
 		for (int j = 0; j < vector_class_feature_probability.size(); j++) {
 			int current_label = j;
 			vector<vector<double>> vector_feature_probabilities_of_a_class = vector_class_feature_probability[j];
@@ -32,7 +30,7 @@ map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(vector<d
 				+ CalculatePosteriorProbability(set_vector_feature_probabilities);
 			vector_test_probabilities.push_back(posterior_probability);
 		}
-		map_class_posterior_probabilities.insert(pair<vector<vector<int>>, vector<double>>(current_image, vector_test_probabilities));
+		map_class_posterior_probabilities.insert(std::pair<vector<vector<int>>, vector<double>>(current_image, vector_test_probabilities));
 	}
 	return map_class_posterior_probabilities;
 }
@@ -64,21 +62,10 @@ map<vector<vector<int>>, int> MapImageToEstimatedClass(map<vector<vector<int>>, 
 		vector<vector<int>> current_image = it->first;
 		vector<double> vector_posterior_probabilities_per_class = it->second;
 		int estimated_class = EstimateImageClass(vector_posterior_probabilities_per_class);
-		map_image_to_estimated_class.insert(pair<vector<vector<int>>, int>(current_image, estimated_class));
+		map_image_to_estimated_class.insert(std::pair<vector<vector<int>>, int>(current_image, estimated_class));
 	}
 	return map_image_to_estimated_class;
 }
-
-/*vector<int> VectorTestImageEstimatedClasses(map<vector<vector<int>>, vector<double>>& map_class_posterior_probabilities) {
-	vector<int> test_image_estimated_classes;
-	for (map<vector<vector<int>>, vector<double>>::iterator it = map_class_posterior_probabilities.begin(); it != map_class_posterior_probabilities.end(); ++it) {
-		vector<double> vector_posterior_probabilities_per_class = it->second;
-		int estimated_class = EstimateImageClass(vector_posterior_probabilities_per_class);
-		test_image_estimated_classes.push_back(estimated_class);
-		//cout << "estimated class: " << estimated_class << endl;
-	}
-	return test_image_estimated_classes;
-}*/
 
 //Uses the calculated posterior probabilities to estimate the test image's class by taking the max posterior probability
 int EstimateImageClass(vector<double>& vector_posterior_probabilities_per_class) {
@@ -103,7 +90,7 @@ map<vector<vector<int>>, int> MapTestImageToActualClass(vector<vector<vector<int
 	for (int i = 0; i < test_images.size(); i++) {
 		vector<vector<int>> current_image = test_images.at(i);
 		int correct_test_label = test_labels.at(i);
-		map_test_image_to_actual_class.insert(pair<vector<vector<int>>, int>(current_image, correct_test_label));
+		map_test_image_to_actual_class.insert(std::pair<vector<vector<int>>, int>(current_image, correct_test_label));
 	}
 	return map_test_image_to_actual_class;
 }

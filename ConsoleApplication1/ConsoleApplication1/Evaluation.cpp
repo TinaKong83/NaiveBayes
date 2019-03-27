@@ -1,33 +1,18 @@
 #include <iostream>
-#include"Evaluation.h"
-using namespace std;
+#include "Evaluation.h"
 
 //Given all of your testing images: Now map the test image's actual class to its estimated class
 multimap<int, int> MapActualClassToEstimated(map<vector<vector<int>>, int>& map_test_image_to_estimated_class,
 	map<vector<vector<int>>, int>& map_test_image_to_actual_class) {
-
 	multimap<int, int> map_actual_class_to_estimated;
 	for (map<vector<vector<int>>, int>::iterator it = map_test_image_to_estimated_class.begin(); it != map_test_image_to_estimated_class.end(); ++it) {
 		vector<vector<int>> current_image = it->first;
 		int estimated_class = it->second;
 		int actual_class = map_test_image_to_actual_class[current_image];
-		map_actual_class_to_estimated.insert(pair<int, int>(actual_class, estimated_class));
+		map_actual_class_to_estimated.insert(std::pair<int, int>(actual_class, estimated_class));
 	}
 	return map_actual_class_to_estimated;
 }
-
-/*multimap<int, int> MapActualClassToEstimated(vector<int>& vector_test_estimated_classes,
-	vector<int>& vector_actual_test_classes) {
-
-	multimap<int, int> map_actual_class_to_estimated;
-
-	for (int i = 0; i < vector_actual_test_classes.size(); i++) {
-		int actual_class = vector_actual_test_classes.at(i);
-		int estimated_class = vector_test_estimated_classes.at(i);
-		map_actual_class_to_estimated.insert(pair<int, int>(actual_class, estimated_class));
-	}
-	return map_actual_class_to_estimated;
-}*/
 
 int CountImagesFromRowInCol(int row, int col, multimap<int, int>& map_actual_class_to_estimated) {
 	int count_num_images_from_r_estimated_in_c = 0;
@@ -57,7 +42,7 @@ void PrintConfusionMatrix(vector<vector<double>>& confusion_matrix) {
 		for (int j = 0; j < kMatrixSize; j++) {
 			printf("%.2f  ", confusion_matrix[i][j]);
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
-	cout << endl;
+	std::cout << std::endl;
 }

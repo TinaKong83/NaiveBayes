@@ -2,15 +2,14 @@
 #include "catch.h"
 #include "TrainingData.h"
 #include <iostream>
-using namespace std;
 
-/*TEST_CASE("Find label prior probability calculations") {
-	//string labels_test_file = "C:\\Users\\kongt\\naivebayes-TinaKong83\\CreateLabelsTestCase.txt";
-	vector<int> labels_test_file;
-	labels_test_file.push_back(0);
+TEST_CASE("Find label prior probability calculations") {
+	vector<int> labels_test;
+	labels_test.push_back(0);
+	labels_test.push_back(0);
+	labels_test.push_back(0);
+	labels_test.push_back(1);
+	labels_test.push_back(1);
 
-	vector<double> vector_label_priors;
-	vector_label_priors.push_back(0);
-
-	REQUIRE(VectorLabelPriors(labels_test_file) == vector_label_priors);
-}*/
+	REQUIRE(CalculateLabelPriorProbability(0, labels_test) == 0.6);
+}
