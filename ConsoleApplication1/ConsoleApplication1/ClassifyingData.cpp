@@ -2,20 +2,20 @@
 #include "ClassifyingData.h"
 using namespace std;
 
+//Calculates the posterior probabilities of a class
 double CalculatePosteriorProbability(vector<vector<double>>& vector_feature_probabilities) {
 	double posterior_probability_of_class = 0.0;
-	for (int i = 0; i < 28; i++) {
-		for (int j = 0; j < 28; j++) {
+	for (int i = 0; i < kCurrentImageSize; i++) {
+		for (int j = 0; j < kCurrentImageSize; j++) {
 			posterior_probability_of_class = posterior_probability_of_class + log(vector_feature_probabilities[i][j]);
 		}
 	}
 	return posterior_probability_of_class;
 }
 
+//Maps an image to a list of its posterior probabilities per class
 map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(vector<double>& vector_label_priors,
 	vector<vector<vector<double>>>& vector_class_feature_probability, vector<vector<vector<int>>>& testing_images) {
-	cout << "entering MapClassPosteriorProbabilities method" << endl;
-
 	map<vector<vector<int>>, vector<double>> map_class_posterior_probabilities;
 
 	for (int i = 0; i < testing_images.size(); i++) {
@@ -37,12 +37,14 @@ map<vector<vector<int>>, vector<double>> MapClassPosteriorProbabilities(vector<d
 	return map_class_posterior_probabilities;
 }
 
+/*Since the feature probabilities are calculated for white pixels by default, this method allows the probability of black
+pixel to be stored as well*/
 vector<vector<double>> SetImageTestFeatureProbabilities(vector<vector<int>>& current_image, 
 	vector<vector<double>>& vector_feature_probabilities) {
 	vector<vector<double>> set_vector_feature_probabilities(28, vector<double>(28, 0.0));
 
-	for (int i = 0; i < 28; i++) {
-		for (int j = 0; j < 28; j++) {
+	for (int i = 0; i < kCurrentImageSize; i++) {
+		for (int j = 0; j < kCurrentImageSize; j++) {
 			if (current_image[i][j] == 0) {
 				set_vector_feature_probabilities[i][j] = vector_feature_probabilities[i][j];
 			}
@@ -54,10 +56,8 @@ vector<vector<double>> SetImageTestFeatureProbabilities(vector<vector<int>>& cur
 	return set_vector_feature_probabilities;
 }
 
-//key: image
-//value: estimated class
+//Maps an image to its estimated class, based on the posterior probabilities 
 map<vector<vector<int>>, int> MapImageToEstimatedClass(map<vector<vector<int>>, vector<double>>& map_class_posterior_probabilities) {
-	cout << "entering MapImageToEstimatedClass method" << endl;
 	map<vector<vector<int>>, int> map_image_to_estimated_class;
 
 	for (map<vector<vector<int>>, vector<double>>::iterator it = map_class_posterior_probabilities.begin(); it != map_class_posterior_probabilities.end(); ++it) {
@@ -80,6 +80,7 @@ map<vector<vector<int>>, int> MapImageToEstimatedClass(map<vector<vector<int>>, 
 	return test_image_estimated_classes;
 }*/
 
+//Uses the calculated posterior probabilities to estimate the test image's class by taking the max posterior probability
 int EstimateImageClass(vector<double>& vector_posterior_probabilities_per_class) {
 	int estimated_class = 0;
 	double max_posterior_probability = vector_posterior_probabilities_per_class.at(0);
@@ -95,6 +96,7 @@ int EstimateImageClass(vector<double>& vector_posterior_probabilities_per_class)
 	return estimated_class;
 }
 
+//Maps an image to its actual class
 map<vector<vector<int>>, int> MapTestImageToActualClass(vector<vector<vector<int>>>& test_images, vector<int>& test_labels) {
 	map<vector<vector<int>>, int> map_test_image_to_actual_class;
 	

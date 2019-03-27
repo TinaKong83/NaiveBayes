@@ -41,10 +41,10 @@ int CountImagesFromRowInCol(int row, int col, multimap<int, int>& map_actual_cla
 	return count_num_images_from_r_estimated_in_c;
 }
 
-vector<vector<double>> GenerateConfusionMatrix(multimap<int, int>& map_actual_class_to_estimated) {
-	vector<vector<double>> confusion_matrix(10, vector<double>(10, 0.0));
-	for (int r = 0; r < 10; r++) {
-		for (int c = 0; c < 10; c++) {
+vector<vector<double>> PopulateConfusionMatrix(multimap<int, int>& map_actual_class_to_estimated) {
+	vector<vector<double>> confusion_matrix(10, vector<double>(kMatrixSize, 0.0));
+	for (int r = 0; r < kMatrixSize; r++) {
+		for (int c = 0; c < kMatrixSize; c++) {
 			double count_images_actually_from_r = map_actual_class_to_estimated.count(r);
 			confusion_matrix[r][c] = (double) CountImagesFromRowInCol(r, c, map_actual_class_to_estimated) / count_images_actually_from_r;
 		}
@@ -53,8 +53,8 @@ vector<vector<double>> GenerateConfusionMatrix(multimap<int, int>& map_actual_cl
 }
 
 void PrintConfusionMatrix(vector<vector<double>>& confusion_matrix) {
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
+	for (int i = 0; i < kMatrixSize; i++) {
+		for (int j = 0; j < kMatrixSize; j++) {
 			printf("%.2f  ", confusion_matrix[i][j]);
 		}
 		cout << endl;

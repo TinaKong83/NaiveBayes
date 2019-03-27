@@ -9,6 +9,9 @@ using namespace std;
 
 vector<int> CreateVectorOfLabels(string file_name);
 vector<vector<vector<int>>> CreateVectorOfImages(string file_name);
+int TakeCommandArgument(int argc, char *argv[]);
+
+const int kImageSize = 28;
 
 
 

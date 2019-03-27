@@ -12,6 +12,8 @@ multimap<int, int> MapActualClassToEstimated(map<vector<vector<int>>, int>& map_
 
 int CountImagesFromRowInCol(int row, int col, multimap<int, int>& map_actual_class_to_estimated);
 
-vector<vector<double>> GenerateConfusionMatrix(multimap<int, int>& map_actual_class_to_estimated);
+vector<vector<double>> PopulateConfusionMatrix(multimap<int, int>& map_actual_class_to_estimated);
 
 void PrintConfusionMatrix(vector<vector<double>>& confusion_matrix);
+
+const int kMatrixSize = 10;

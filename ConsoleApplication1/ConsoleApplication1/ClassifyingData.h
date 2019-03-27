@@ -24,3 +24,4 @@ int EstimateImageClass(vector<double>& vector_posterior_probabilities_per_class)
 
 map<vector<vector<int>>, int> MapTestImageToActualClass(vector<vector<vector<int>>>& test_images, vector<int>& test_labels);
 
+const int kCurrentImageSize = 28;
